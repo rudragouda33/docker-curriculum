@@ -27,11 +27,11 @@ pipeline {
                      script{
                         def image_id = registry + ":$BUILD_NUMBER"
                         sh "sed -i 's#image_id#${image_id}#g' deployment.yml"
-                        sh "scp -o StrictHostKeyChecking=no deployment.yml service.yml admin@204.236.255.211:/home/admin"
+                        sh "scp -o StrictHostKeyChecking=no deployment.yml service.yml admin@3.88.35.101:/home/admin"
                         try{   
-                          sh "ssh admin@204.236.255.211 kubectl apply -f ."
+                          sh "ssh admin@3.88.35.101 kubectl apply -f ."
                         }catch(error){
-                         sh "ssh admin@204.236.255.211 kubectl create -f ."
+                         sh "ssh admin@3.88.35.101 kubectl create -f ."
                         }
                      }   
                  }
