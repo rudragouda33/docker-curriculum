@@ -28,8 +28,7 @@ pipeline {
                   
                      script{
                         def image_id = registry + ":$BUILD_NUMBER"
-                        sh "sed -i 's#image_id#${image_id}#g' deployment.yml"
-                        sh "scp -o StrictHostKeyChecking=no deployment.yml service.yml ec2-user@3.88.35.101:/home/ec2-user"
+                        
                         try{   
                           sh "ssh ec2-user@3.88.35.101 docker pull $image_id"
                         }catch(error){
