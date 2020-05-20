@@ -11,11 +11,13 @@ pipeline {
             }
             steps{
                 script {
+                    dir("flask-app"){
                     def appimage = docker.build registry + ":$BUILD_NUMBER"
                     
                     docker.withRegistry( '', registryCredential ) {
                         appimage.push()
                         appimage.push('latest')
+                    }
                     }
                 }
             }
