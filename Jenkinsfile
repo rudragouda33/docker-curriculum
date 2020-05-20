@@ -31,9 +31,9 @@ pipeline {
                         sh "sed -i 's#image_id#${image_id}#g' deployment.yml"
                         sh "scp -o StrictHostKeyChecking=no deployment.yml service.yml ec2-user@3.88.35.101:/home/ec2-user"
                         try{   
-                          sh "ssh ec2-user@3.88.35.101 kubectl apply -f ."
+                          sh "ssh ec2-user@3.88.35.101 docker pull $image_id"
                         }catch(error){
-                         sh "ssh ec2-user@3.88.35.101 kubectl create -f ."
+                         sh "ssh ec2-user@3.88.35.101 docker run -p 8888:5000 $image_id"
                         }
                      }   
                  }
