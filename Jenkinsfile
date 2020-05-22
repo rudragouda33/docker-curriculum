@@ -32,7 +32,7 @@ pipeline {
                         try{   
                           sh "ssh ec2-user@3.88.35.101 docker pull $image_id"
                         }catch(error){
-                         sh "ssh ec2-user@3.88.35.101 docker run -p 8888:5000 $image_id"
+                         sh "ssh ec2-user@3.88.35.101 kubectl create deployment dockerdemo --image $image_id"
                         }
                      }   
                  }
